@@ -1,0 +1,18 @@
+<h2>Random Recipe</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @recipe.title %>
+  </li>
+
+  <li>
+    <strong>Body:</strong>
+    <%= @recipe.body %>
+  </li>
+
+</ul>
+
+<span><%= link "Another one", to: recipes_recipe_path(@conn, :random) %></span>
+<span><%= link "Back", to: recipes_recipe_path(@conn, :index) %></span>

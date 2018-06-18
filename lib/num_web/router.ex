@@ -25,6 +25,14 @@ defmodule NumWeb.Router do
     resources "/users", UserController
     resources "/sessions", SessionController, only: [:new, :create, :delete],
                                               singleton: true
+
+  end
+
+  scope "/recipes", NumWeb.Recipes, as: :recipes do
+    pipe_through [:browser, :authenticate_user]
+
+    get "/random", RecipeController, :random
+    resources "/recipes", RecipeController
   end
 
   defp authenticate_user(conn, _) do

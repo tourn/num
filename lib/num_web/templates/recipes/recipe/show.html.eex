@@ -1,0 +1,18 @@
+<h2>Show Recipe</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @recipe.title %>
+  </li>
+
+  <li>
+    <strong>Body:</strong>
+    <%= @recipe.body %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: recipes_recipe_path(@conn, :edit, @recipe) %></span>
+<span><%= link "Back", to: recipes_recipe_path(@conn, :index) %></span>
