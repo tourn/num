@@ -14,18 +14,17 @@ defmodule NumWeb.Router do
   end
 
   scope "/", NumWeb do
-    pipe_through :browser # Use the default browser stack
+    pipe_through [:browser, :authenticate_user]
 
     get "/", PageController, :index
 
-    get "/hello", HelloController, :index
-
-    get "/hello/:messenger", HelloController, :show
-
     resources "/users", UserController
+  end
+
+  scope "/", NumWeb do
+    pipe_through [:browser]
     resources "/sessions", SessionController, only: [:new, :create, :delete],
                                               singleton: true
-
   end
 
   scope "/recipes", NumWeb.Recipes, as: :recipes do
@@ -39,8 +38,8 @@ defmodule NumWeb.Router do
     case get_session(conn, :user_id) do
       nil ->
         conn
-        |> Phoenix.Controller.put_flash(:error, "Login required")
-        |> Phoenix.Controller.redirect(to: "/")
+        |> Phoenix.Controller.put_flash(:error, "Bitte einloggen!")
+        |> Phoenix.Controller.redirect(to: "/sessions/new")
         |> halt()
       user_id ->
         assign(conn, :current_user, Num.Accounts.get_user!(user_id))
