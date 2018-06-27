@@ -1,0 +1,8 @@
+<span><%= button "Kochen!", to: recipes_recipe_path(@conn, :cook, @recipe), class: "btn btn-primary" %></span>
+<span><%= button "Was anderes", to: recipes_recipe_path(@conn, :skip, @recipe), class: "btn btn-default" %></span>
+
+<h2><%= @recipe.title %></h2>
+
+<%= if @recipe.photo != nil do %>
+<img src="<%= encode_photo(@recipe)%>"/>
+<% end %>

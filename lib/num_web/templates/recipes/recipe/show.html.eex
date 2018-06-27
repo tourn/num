@@ -1,24 +1,12 @@
-<h2>Show Recipe</h2>
+<h2><%= @recipe.title %></h2>
 
-<ul>
+<%= if @recipe.photo != nil do %>
+<li>
+<img src="<%= encode_photo(@recipe)%>"/>
+</li>
+<% end %>
 
-  <li>
-    <strong>Title:</strong>
-    <%= @recipe.title %>
-  </li>
-
-  <%= if @recipe.photo != nil do %>
-  <li>
-    <img src="<%= encode_photo(@recipe)%>"/>
-  </li>
-  <% end %>
-
-  <li>
-    <strong>Body:</strong>
-    <%= @recipe.body |> urls_to_anchors() |> markdown() %>
-  </li>
-
-</ul>
+<%= @recipe.body |> urls_to_anchors() |> markdown() %>
 
 <span><%= link "Edit", to: recipes_recipe_path(@conn, :edit, @recipe) %></span>
 <span><%= link "Back", to: recipes_recipe_path(@conn, :index) %></span>

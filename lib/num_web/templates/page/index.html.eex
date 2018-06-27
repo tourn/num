@@ -1,6 +1,7 @@
 <div class="jumbotron">
   <h2><%= gettext "Willkommen bei %{name}!", name: "Num" %></h2>
   <p class="lead">Eine Plattform, die weiss, was du essen willst!</p>
+  <%= button "Was denn?", to: recipes_recipe_path(@conn, :random), method: "get", class: "btn btn-primary" %>
 </div>
 
 <div class="row marketing">

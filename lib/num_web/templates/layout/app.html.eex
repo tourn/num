@@ -15,7 +15,7 @@
     <div class="container">
       <header class="header">
         <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
+          <ul class="nav nav-pills">
             <li><%= link "Home", to: page_path(@conn, :index) %></li>
             <li><%= link "Login", to: session_path(@conn, :new) %></li>
           </ul>

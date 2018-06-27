@@ -79,25 +79,33 @@ defmodule NumWeb.Recipes.RecipeController do
   def random(conn, _params) do
     recipes = Recipes.list_recipes()
     recipe = Enum.random(recipes)
-    render(conn, "random.html", recipe: recipe)
+    render(conn, "pick.html", recipe: recipe)
   end
 
   def cook(conn, %{"id" => recipe_id}) do
     recipe = Recipes.get_recipe!(recipe_id)
-#    case Recipes.create_recipe_event(%RecipeEvent{
-#      recipe: recipe, #fixme this apparently doesn't populate the the recipe and user fields like this...
-#      user: conn.assigns.current_user,
-#      event: "cooked"
-#    }) do
     case Recipes.create_recipe_event(%{
-      "recipe" => recipe, #fixme this apparently doesn't populate the the recipe and user fields like this...
+      "recipe" => recipe,
       "user" => conn.assigns.current_user,
-      "event" => "cooked"
+      "event" => "cook"
     }) do
       {:ok, _} ->
         conn
         |> put_flash(:info, "mjam mjam")
         |> redirect(to: recipes_recipe_path(conn, :show, recipe_id))
+    end
+  end
+
+  def skip(conn, %{"id" => recipe_id}) do
+    recipe = Recipes.get_recipe!(recipe_id)
+    case Recipes.create_recipe_event(%{
+      "recipe" => recipe,
+      "user" => conn.assigns.current_user,
+      "event" => "skip"
+    }) do
+      {:ok, _} ->
+        conn
+        |> redirect(to: recipes_recipe_path(conn, :random))
     end
   end
 

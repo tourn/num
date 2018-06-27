@@ -23,6 +23,6 @@ defmodule Num.Recipes.RecipeEvent do
     |> validate_required([:event])
     |> validate_required([:user])
     |> validate_required([:recipe])
-    |> validate_inclusion(:event, ["cooked"])
+    |> validate_inclusion(:event, ["cook", "skip"])
   end
 end
