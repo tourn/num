@@ -64,4 +64,66 @@ defmodule Num.RecipesTest do
       assert %Ecto.Changeset{} = Recipes.change_recipe(recipe)
     end
   end
+
+  describe "recipe_event" do
+    alias Num.Recipes.RecipeEvent
+
+    @valid_attrs %{date: ~D[2010-04-17], event: "some event"}
+    @update_attrs %{date: ~D[2011-05-18], event: "some updated event"}
+    @invalid_attrs %{date: nil, event: nil}
+
+    def recipe_event_fixture(attrs \\ %{}) do
+      {:ok, recipe_event} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Recipes.create_recipe_event()
+
+      recipe_event
+    end
+
+    test "list_recipe_event/0 returns all recipe_event" do
+      recipe_event = recipe_event_fixture()
+      assert Recipes.list_recipe_event() == [recipe_event]
+    end
+
+    test "get_recipe_event!/1 returns the recipe_event with given id" do
+      recipe_event = recipe_event_fixture()
+      assert Recipes.get_recipe_event!(recipe_event.id) == recipe_event
+    end
+
+    test "create_recipe_event/1 with valid data creates a recipe_event" do
+      assert {:ok, %RecipeEvent{} = recipe_event} = Recipes.create_recipe_event(@valid_attrs)
+      assert recipe_event.date == ~D[2010-04-17]
+      assert recipe_event.event == "some event"
+    end
+
+    test "create_recipe_event/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Recipes.create_recipe_event(@invalid_attrs)
+    end
+
+    test "update_recipe_event/2 with valid data updates the recipe_event" do
+      recipe_event = recipe_event_fixture()
+      assert {:ok, recipe_event} = Recipes.update_recipe_event(recipe_event, @update_attrs)
+      assert %RecipeEvent{} = recipe_event
+      assert recipe_event.date == ~D[2011-05-18]
+      assert recipe_event.event == "some updated event"
+    end
+
+    test "update_recipe_event/2 with invalid data returns error changeset" do
+      recipe_event = recipe_event_fixture()
+      assert {:error, %Ecto.Changeset{}} = Recipes.update_recipe_event(recipe_event, @invalid_attrs)
+      assert recipe_event == Recipes.get_recipe_event!(recipe_event.id)
+    end
+
+    test "delete_recipe_event/1 deletes the recipe_event" do
+      recipe_event = recipe_event_fixture()
+      assert {:ok, %RecipeEvent{}} = Recipes.delete_recipe_event(recipe_event)
+      assert_raise Ecto.NoResultsError, fn -> Recipes.get_recipe_event!(recipe_event.id) end
+    end
+
+    test "change_recipe_event/1 returns a recipe_event changeset" do
+      recipe_event = recipe_event_fixture()
+      assert %Ecto.Changeset{} = Recipes.change_recipe_event(recipe_event)
+    end
+  end
 end

@@ -101,4 +101,100 @@ defmodule Num.Recipes do
   def change_recipe(%Recipe{} = recipe) do
     Recipe.changeset(recipe, %{})
   end
+
+  alias Num.Recipes.RecipeEvent
+
+  @doc """
+  Returns the list of recipe_event.
+
+  ## Examples
+
+      iex> list_recipe_event()
+      [%RecipeEvent{}, ...]
+
+  """
+  def list_recipe_event do
+    Repo.all(RecipeEvent)
+  end
+
+  @doc """
+  Gets a single recipe_event.
+
+  Raises `Ecto.NoResultsError` if the Recipe event does not exist.
+
+  ## Examples
+
+      iex> get_recipe_event!(123)
+      %RecipeEvent{}
+
+      iex> get_recipe_event!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_recipe_event!(id), do: Repo.get!(RecipeEvent, id)
+
+  @doc """
+  Creates a recipe_event.
+
+  ## Examples
+
+      iex> create_recipe_event(%{field: value})
+      {:ok, %RecipeEvent{}}
+
+      iex> create_recipe_event(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_recipe_event(attrs \\ %{}) do
+    %RecipeEvent{}
+    |> RecipeEvent.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a recipe_event.
+
+  ## Examples
+
+      iex> update_recipe_event(recipe_event, %{field: new_value})
+      {:ok, %RecipeEvent{}}
+
+      iex> update_recipe_event(recipe_event, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_recipe_event(%RecipeEvent{} = recipe_event, attrs) do
+    recipe_event
+    |> RecipeEvent.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a RecipeEvent.
+
+  ## Examples
+
+      iex> delete_recipe_event(recipe_event)
+      {:ok, %RecipeEvent{}}
+
+      iex> delete_recipe_event(recipe_event)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_recipe_event(%RecipeEvent{} = recipe_event) do
+    Repo.delete(recipe_event)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking recipe_event changes.
+
+  ## Examples
+
+      iex> change_recipe_event(recipe_event)
+      %Ecto.Changeset{source: %RecipeEvent{}}
+
+  """
+  def change_recipe_event(%RecipeEvent{} = recipe_event) do
+    RecipeEvent.changeset(recipe_event, %{})
+  end
 end

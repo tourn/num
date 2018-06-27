@@ -3,6 +3,9 @@ defmodule NumWeb.Recipes.RecipeController do
 
   alias Num.Recipes
   alias Num.Recipes.Recipe
+  alias Num.Recipes.RecipeEvent
+
+  plug :require_user when action in [:cook]
 
   def index(conn, _params) do
     recipes = Recipes.list_recipes()
@@ -63,4 +66,34 @@ defmodule NumWeb.Recipes.RecipeController do
     recipe = Enum.random(recipes)
     render(conn, "random.html", recipe: recipe)
   end
+
+  def cook(conn, %{"id" => recipe_id}) do
+    recipe = Recipes.get_recipe!(recipe_id)
+#    case Recipes.create_recipe_event(%RecipeEvent{
+#      recipe: recipe, #fixme this apparently doesn't populate the the recipe and user fields like this...
+#      user: conn.assigns.current_user,
+#      event: "cooked"
+#    }) do
+    case Recipes.create_recipe_event(%{
+      "recipe" => recipe, #fixme this apparently doesn't populate the the recipe and user fields like this...
+      "user" => conn.assigns.current_user,
+      "event" => "cooked"
+    }) do
+      {:ok, _} ->
+        conn
+        |> put_flash(:info, "mjam mjam")
+        |> redirect(to: recipes_recipe_path(conn, :show, recipe_id))
+    end
+  end
+
+  defp require_user(conn, _) do
+    case get_session(conn, :user_id) do
+      nil -> conn
+      |> put_flash(:error, "User required!")
+      |> halt()
+      id -> conn
+      |> assign(:current_user, Num.Accounts.get_user!(id))
+    end
+  end
+
 end

@@ -2,10 +2,12 @@ defmodule Num.Recipes.Recipe do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Num.Recipes.RecipeEvent
 
   schema "recipes" do
     field :body, :string
     field :title, :string
+    has_many :events, RecipeEvent
 
     timestamps()
   end

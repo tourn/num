@@ -31,6 +31,7 @@ defmodule NumWeb.Router do
     pipe_through [:browser, :authenticate_user]
 
     get "/random", RecipeController, :random
+    get "/recipes/:id/cook", RecipeController, :cook #this should be a post
     resources "/recipes", RecipeController
   end
 
