@@ -102,7 +102,35 @@ defmodule Num.Recipes do
     Recipe.changeset(recipe, %{})
   end
 
+
+  import Ecto.Query, only: [from: 2]
+
   alias Num.Recipes.RecipeEvent
+
+  def last_cooked(recipe_id) do
+    query = from e in RecipeEvent,
+      where: e.recipe_id == ^recipe_id and e.event == "cooked",
+      order_by: [desc: :inserted_at],
+      limit: 1,
+      select: e.inserted_at
+
+    Repo.one(query)
+  end
+
+
+  def list_recipes_with_events do
+    stats_query = """
+    select id, title, cooked_at, coalesce(cooked, 0) cooked, coalesce(skipped, 0) skipped from recipes
+    left join (select recipe_id, count(*) cooked, max(inserted_at) cooked_at from recipe_event where event = 'cook' group by recipe_id) c  on recipes.id = c.recipe_id
+    left join (select recipe_id, count(*) skipped from recipe_event where event = 'skip' group by recipe_id) s  on recipes.id = s.recipe_id
+    """
+
+    types = %{id: :integer, title: :string, cooked_at: :naive_datetime, cooked: :integer, skipped: :integer}
+
+    {:ok, result} = Ecto.Adapters.SQL.query(Repo, stats_query)
+    Enum.map(result.rows, &Repo.load(types, {result.columns, &1}))
+  end
+
 
   @doc """
   Returns the list of recipe_event.

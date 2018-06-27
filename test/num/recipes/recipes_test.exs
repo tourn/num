@@ -63,6 +63,11 @@ defmodule Num.RecipesTest do
       recipe = recipe_fixture()
       assert %Ecto.Changeset{} = Recipes.change_recipe(recipe)
     end
+
+    test "list_recipes_with_events" do
+      stuff = Recipes.list_recipes_with_events()
+      IO.inspect(stuff)
+    end
   end
 
   describe "recipe_event" do

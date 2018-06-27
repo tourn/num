@@ -7,7 +7,8 @@ defmodule NumWeb.Recipes.RecipeController do
   plug :require_user when action in [:cook]
 
   def index(conn, _params) do
-    recipes = Recipes.list_recipes()
+    #recipes = Recipes.list_recipes()
+    recipes = Recipes.list_recipes_with_events()
     render(conn, "index.html", recipes: recipes)
   end
 
@@ -79,7 +80,8 @@ defmodule NumWeb.Recipes.RecipeController do
   def random(conn, _params) do
     recipes = Recipes.list_recipes()
     recipe = Enum.random(recipes)
-    render(conn, "pick.html", recipe: recipe)
+    last_cooked = Recipes.last_cooked(recipe.id)
+    render(conn, "pick.html", recipe: recipe, last_cooked: last_cooked)
   end
 
   def cook(conn, %{"id" => recipe_id}) do
