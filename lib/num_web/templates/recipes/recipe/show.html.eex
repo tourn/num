@@ -15,7 +15,7 @@
 
   <li>
     <strong>Body:</strong>
-    <%= markdown(@recipe.body)%>
+    <%= @recipe.body |> urls_to_anchors() |> markdown() %>
   </li>
 
 </ul>
