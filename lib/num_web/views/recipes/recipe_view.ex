@@ -6,4 +6,14 @@ defmodule NumWeb.Recipes.RecipeView do
     encoded = Base.encode64(recipe.photo)
     "data:#{recipe.photo_type};base64, #{encoded}"
   end
+
+  def markdown(nil) do
+    ""
+  end
+
+  def markdown(body) do
+    body
+    |> Earmark.as_html!
+    |> raw
+  end
 end

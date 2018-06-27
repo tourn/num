@@ -15,7 +15,7 @@
 
   <li>
     <strong>Body:</strong>
-    <%= @recipe.body %>
+    <%= markdown(@recipe.body)%>
   </li>
 
 </ul>
