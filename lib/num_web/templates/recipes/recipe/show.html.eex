@@ -7,6 +7,12 @@
     <%= @recipe.title %>
   </li>
 
+  <%= if @recipe.photo != nil do %>
+  <li>
+    <img src="<%= encode_photo(@recipe)%>"/>
+  </li>
+  <% end %>
+
   <li>
     <strong>Body:</strong>
     <%= @recipe.body %>

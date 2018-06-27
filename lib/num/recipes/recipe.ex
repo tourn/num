@@ -7,6 +7,8 @@ defmodule Num.Recipes.Recipe do
   schema "recipes" do
     field :body, :string
     field :title, :string
+    field :photo, :binary
+    field :photo_type, :string
     has_many :events, RecipeEvent
 
     timestamps()
@@ -15,7 +17,7 @@ defmodule Num.Recipes.Recipe do
   @doc false
   def changeset(recipe, attrs) do
     recipe
-    |> cast(attrs, [:title, :body])
+    |> cast(attrs, [:title, :body, :photo, :photo_type])
     |> validate_required([:title, :body])
   end
 end

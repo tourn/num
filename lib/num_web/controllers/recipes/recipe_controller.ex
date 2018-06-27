@@ -3,7 +3,6 @@ defmodule NumWeb.Recipes.RecipeController do
 
   alias Num.Recipes
   alias Num.Recipes.Recipe
-  alias Num.Recipes.RecipeEvent
 
   plug :require_user when action in [:cook]
 
@@ -17,8 +16,24 @@ defmodule NumWeb.Recipes.RecipeController do
     render(conn, "new.html", changeset: changeset)
   end
 
+#  defp transform_params(%{"photo" => photo} = params) do
+#    data = File.read()
+#  end
+#
+#  defp transform_params(recipe_params) do
+#    recipe_params
+#  end
+
+
   def create(conn, %{"recipe" => recipe_params}) do
-    case Recipes.create_recipe(recipe_params) do
+    IO.inspect recipe_params
+    params = case recipe_params do
+      %{"photo" => photo} = rest -> rest
+        |> Map.put("photo", File.read!(photo.path))
+        |> Map.put("photo_type", photo.content_type)
+      rest -> rest
+    end
+    case Recipes.create_recipe(params) do
       {:ok, recipe} ->
         conn
         |> put_flash(:info, "Recipe created successfully.")
