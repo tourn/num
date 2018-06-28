@@ -107,9 +107,9 @@ defmodule Num.Recipes do
 
   alias Num.Recipes.RecipeEvent
 
-  def last_cooked(recipe_id) do
+  def last_cooked(recipe_id, user_id) do
     query = from e in RecipeEvent,
-      where: e.recipe_id == ^recipe_id and e.event == "cooked",
+      where: e.recipe_id == ^recipe_id and e.user_id == ^user_id and e.event == "cooked",
       order_by: [desc: :inserted_at],
       limit: 1,
       select: e.inserted_at
@@ -118,14 +118,20 @@ defmodule Num.Recipes do
   end
 
 
-  def list_recipes_with_events do
+  def list_recipes_with_events(user_id) do
     stats_query = """
-    select id, title, cooked_at, coalesce(cooked, 0) cooked, coalesce(skipped, 0) skipped from recipes
-    left join (select recipe_id, count(*) cooked, max(inserted_at) cooked_at from recipe_event where event = 'cook' group by recipe_id) c  on recipes.id = c.recipe_id
-    left join (select recipe_id, count(*) skipped from recipe_event where event = 'skip' group by recipe_id) s  on recipes.id = s.recipe_id
+    select id, title, cooked_at, skipped_at, coalesce(cooked, 0) cooked, coalesce(skipped, 0) skipped from recipes
+    left join (select recipe_id, count(*) cooked,  max(inserted_at) cooked_at  from recipe_event where event = 'cook' and user_id=#{user_id} group by recipe_id) c  on recipes.id = c.recipe_id
+    left join (select recipe_id, count(*) skipped, max(inserted_at) skipped_at from recipe_event where event = 'skip' and user_id=#{user_id} group by recipe_id) s  on recipes.id = s.recipe_id
     """
 
-    types = %{id: :integer, title: :string, cooked_at: :naive_datetime, cooked: :integer, skipped: :integer}
+    types = %{
+      id: :integer,
+      title: :string,
+      cooked_at: :naive_datetime,
+      skipped_at: :naive_datetime,
+      cooked: :integer,
+      skipped: :integer}
 
     {:ok, result} = Ecto.Adapters.SQL.query(Repo, stats_query)
     Enum.map(result.rows, &Repo.load(types, {result.columns, &1}))
