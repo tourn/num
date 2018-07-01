@@ -17,16 +17,18 @@ defmodule NumWeb.Recipes.RecipeController do
     render(conn, "new.html", changeset: changeset)
   end
 
-
-  def create(conn, %{"recipe" => recipe_params}) do
-    IO.inspect recipe_params
-    params = case recipe_params do
+  defp transform_photo_param(params) do
+     case params do
       %{"photo" => photo} = rest -> rest
         |> Map.put("photo", File.read!(photo.path))
         |> Map.put("photo_type", photo.content_type)
       rest -> rest
     end
-    case Recipes.create_recipe(params) do
+  end
+
+
+  def create(conn, %{"recipe" => recipe_params}) do
+    case Recipes.create_recipe(transform_photo_param(recipe_params)) do
       {:ok, recipe} ->
         conn
         |> put_flash(:info, gettext "Recipe created successfully.")
@@ -50,7 +52,7 @@ defmodule NumWeb.Recipes.RecipeController do
   def update(conn, %{"id" => id, "recipe" => recipe_params}) do
     recipe = Recipes.get_recipe!(id)
 
-    case Recipes.update_recipe(recipe, recipe_params) do
+    case Recipes.update_recipe(recipe, transform_photo_param(recipe_params)) do
       {:ok, recipe} ->
         conn
         |> put_flash(:info, gettext "Recipe updated successfully.")
