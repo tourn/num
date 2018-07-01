@@ -19,6 +19,9 @@
 
   <div class="form-group">
     <%= label f, :photo, class: "control-label" do gettext "Photo" end%>
+    <%= if @recipe.photo_thumb do %>
+    <img src="<%= encode_thumb(@recipe)%>"/>
+    <% end %>
     <%= file_input f, :photo, class: "form-control" %>
     <%= error_tag f, :photo %>
   </div>

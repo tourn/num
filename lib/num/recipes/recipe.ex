@@ -8,6 +8,7 @@ defmodule Num.Recipes.Recipe do
     field :body, :string
     field :title, :string
     field :photo, :binary
+    field :photo_thumb, :binary
     field :photo_type, :string
     has_many :events, RecipeEvent
 
@@ -17,7 +18,7 @@ defmodule Num.Recipes.Recipe do
   @doc false
   def changeset(recipe, attrs) do
     recipe
-    |> cast(attrs, [:title, :body, :photo, :photo_type])
+    |> cast(attrs, [:title, :body, :photo, :photo_thumb, :photo_type])
     |> validate_required([:title])
     |> strip_unsafe_body(recipe)
   end

@@ -42,7 +42,8 @@ defmodule Num.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:earmark, "~> 1.2.4"},
-      {:weighted_random, "~> 0.1.0"}
+      {:weighted_random, "~> 0.1.0"},
+      {:mogrify, "~> 0.6.1"}
     ]
   end
 

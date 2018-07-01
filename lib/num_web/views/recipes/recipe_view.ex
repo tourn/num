@@ -1,6 +1,11 @@
 defmodule NumWeb.Recipes.RecipeView do
   use NumWeb, :view
 
+  def encode_thumb(recipe) do
+    encoded = Base.encode64(recipe.photo_thumb)
+    "data:#{recipe.photo_type};base64, #{encoded}"
+  end
+
   def encode_photo(recipe) do
     IO.inspect recipe.photo
     encoded = Base.encode64(recipe.photo)

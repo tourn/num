@@ -17,13 +17,28 @@ defmodule NumWeb.Recipes.RecipeController do
     render(conn, "new.html", changeset: changeset)
   end
 
+  defp transform_photo_param(%{"photo" => photo} = rest) do
+    import Mogrify
+    full =
+      open(photo.path)
+      |> resize_to_limit("1000x1000")
+      |> format("jpeg")
+      |> save
+
+    thumb =
+      open(photo.path)
+      |> resize_to_limit("200x200")
+      |> format("jpeg")
+      |> save
+
+    rest
+      |> Map.put("photo", File.read!(full.path))
+      |> Map.put("photo_thumb", File.read!(thumb.path))
+      |> Map.put("photo_type", "image/jpeg")
+  end
+
   defp transform_photo_param(params) do
-     case params do
-      %{"photo" => photo} = rest -> rest
-        |> Map.put("photo", File.read!(photo.path))
-        |> Map.put("photo_type", photo.content_type)
-      rest -> rest
-    end
+    params
   end
 
 
