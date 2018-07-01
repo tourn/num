@@ -74,18 +74,18 @@ defmodule NumWeb.Recipes.RecipeController do
     import NaiveDateTime
     hours = 60 * 60
     day = hours * 24
-    four_hours_ago = utc_now() |> add(-4 * hours, :second)
+    skipped_ignore_for = utc_now() |> add(-1 * hours, :second)
     base_weight = 10
     %{
       value: recipe.id,
       weight: case recipe do
-        %{skipped_at: skipped_at} = rest when skipped_at > four_hours_ago -> 0
-        %{skipped_at: nil} = rest -> base_weight
+        %{skipped_at: skipped_at} = rest when skipped_at > skipped_ignore_for -> 0
+        %{cooked_at: nil} = rest -> base_weight
         %{cooked_at: cooked_at} = rest ->
           diff_days = diff(utc_now(), cooked_at, :second)
           |> Kernel./(day)
-          |> Float.round
-          Enum.max([0, base_weight - diff_days])
+          |> Kernel.trunc
+          Enum.min([base_weight, diff_days])
         _ -> base_weight
         end
     }
