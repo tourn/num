@@ -8,5 +8,5 @@
 
 <%= @recipe.body |> urls_to_anchors() |> markdown() %>
 
-<span><%= link "Edit", to: recipes_recipe_path(@conn, :edit, @recipe) %></span>
-<span><%= link "Back", to: recipes_recipe_path(@conn, :index) %></span>
+<span><%= link gettext("Edit"), to: recipes_recipe_path(@conn, :edit, @recipe), class: "btn btn-default" %></span>
+<span><%= link gettext("Back"), to: recipes_recipe_path(@conn, :index), class: "btn btn-default" %></span>

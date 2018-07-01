@@ -29,7 +29,7 @@ defmodule NumWeb.Recipes.RecipeController do
     case Recipes.create_recipe(params) do
       {:ok, recipe} ->
         conn
-        |> put_flash(:info, "Recipe created successfully.")
+        |> put_flash(:info, gettext "Recipe created successfully.")
         |> redirect(to: recipes_recipe_path(conn, :show, recipe))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -53,7 +53,7 @@ defmodule NumWeb.Recipes.RecipeController do
     case Recipes.update_recipe(recipe, recipe_params) do
       {:ok, recipe} ->
         conn
-        |> put_flash(:info, "Recipe updated successfully.")
+        |> put_flash(:info, gettext "Recipe updated successfully.")
         |> redirect(to: recipes_recipe_path(conn, :show, recipe))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", recipe: recipe, changeset: changeset)
@@ -65,7 +65,7 @@ defmodule NumWeb.Recipes.RecipeController do
     {:ok, _recipe} = Recipes.delete_recipe(recipe)
 
     conn
-    |> put_flash(:info, "Recipe deleted successfully.")
+    |> put_flash(:info, gettext "Recipe deleted successfully.")
     |> redirect(to: recipes_recipe_path(conn, :index))
   end
 
@@ -102,7 +102,7 @@ defmodule NumWeb.Recipes.RecipeController do
 
   defp render_random(nil, conn) do
     conn
-    |> put_flash(:info, "Mir sind die Ideen ausgegangen...")
+    |> put_flash(:info, gettext("I've run out of ideas..."))
     |> redirect(to: recipes_recipe_path(conn, :index))
   end
 
@@ -121,7 +121,7 @@ defmodule NumWeb.Recipes.RecipeController do
     }) do
       {:ok, _} ->
         conn
-        |> put_flash(:info, "mjam mjam")
+        |> put_flash(:info, gettext("Looks tasty. Enjoy!"))
         |> redirect(to: recipes_recipe_path(conn, :show, recipe_id))
     end
   end
@@ -142,7 +142,7 @@ defmodule NumWeb.Recipes.RecipeController do
   defp require_user(conn, _) do
     case get_session(conn, :user_id) do
       nil -> conn
-      |> put_flash(:error, "User required!")
+      |> put_flash(:error, gettext("User required!"))
       |> halt()
       id -> conn
       |> assign(:current_user, Num.Accounts.get_user!(id))

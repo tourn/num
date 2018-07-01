@@ -17,6 +17,9 @@ config :num, NumWeb.Endpoint,
   pubsub: [name: Num.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :num, NumWeb.Gettext,
+ default_locale: System.get_env("LOCALE") || "en"
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

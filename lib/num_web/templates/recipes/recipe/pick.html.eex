@@ -1,9 +1,11 @@
-<span><%= button "Kochen!", to: recipes_recipe_path(@conn, :cook, @recipe), class: "btn btn-primary" %></span>
-<span><%= button "Was anderes", to: recipes_recipe_path(@conn, :skip, @recipe), class: "btn btn-default" %></span>
 
+<p><%= gettext "How about..." %></p>
 <h2><%= @recipe.title %></h2>
 
-<p>Zuletzt gekocht: <%= @last_cooked %></p>
+<p><%= gettext "Last cooked: %{at}", at: @last_cooked %></p>
+
+<span><%= button gettext("Cook!"), to: recipes_recipe_path(@conn, :cook, @recipe), class: "btn btn-primary" %></span>
+<span><%= button gettext("Something else"), to: recipes_recipe_path(@conn, :skip, @recipe), class: "btn btn-default" %></span>
 
 <%= if @recipe.photo != nil do %>
 <img src="<%= encode_photo(@recipe)%>"/>

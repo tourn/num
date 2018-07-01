@@ -1,23 +1,23 @@
 <div class="jumbotron">
-  <h2><%= gettext "Willkommen bei %{name}!", name: "Num" %></h2>
-  <p class="lead">Eine Plattform, die weiss, was du essen willst!</p>
-  <%= button "Was denn?", to: recipes_recipe_path(@conn, :random), method: "get", class: "btn btn-primary" %>
+  <h2><%= gettext "Welcome to %{name}!", name: "Num" %></h2>
+  <p class="lead"><%= gettext "A platform that knows what you want to eat!"%></p>
+  <%= button gettext("Like what?"), to: recipes_recipe_path(@conn, :random), method: "get", class: "btn btn-primary" %>
 </div>
 
 <div class="row marketing">
   <div class="col-lg-6">
-    <h4>Rezepte</h4>
+    <h4><%= gettext "Recipes" %></h4>
     <ul>
-      <li><%= link "Neu", to: recipes_recipe_path(@conn, :new) %></li>
-      <li><%= link "Liste", to: recipes_recipe_path(@conn, :index) %></li>
-      <li><%= link "Zufälliges aussuchen", to: recipes_recipe_path(@conn, :random) %></li>
+      <li><%= link gettext("New"), to: recipes_recipe_path(@conn, :new) %></li>
+      <li><%= link gettext("List"), to: recipes_recipe_path(@conn, :index) %></li>
+      <li><%= link gettext("Pick a random one"), to: recipes_recipe_path(@conn, :random) %></li>
     </ul>
   </div>
 
   <div class="col-lg-6">
-    <h4>Benutzer</h4>
+    <h4><%= gettext "Users" %></h4>
     <ul>
-      <li> <%= link "Liste", to: user_path(@conn, :index) %> </li>
+      <li> <%= link gettext("List"), to: user_path(@conn, :index) %> </li>
     </ul>
   </div>
 </div>
