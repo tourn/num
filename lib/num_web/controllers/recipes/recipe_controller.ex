@@ -4,8 +4,6 @@ defmodule NumWeb.Recipes.RecipeController do
   alias Num.Recipes
   alias Num.Recipes.Recipe
 
-  plug :require_user
-
   def index(conn, _params) do
     #recipes = Recipes.list_recipes()
     recipes = Recipes.list_recipes_with_events(conn.assigns.current_user.id)
@@ -179,16 +177,6 @@ defmodule NumWeb.Recipes.RecipeController do
       true -> conn
         |> Plug.Conn.put_resp_header("content-type", recipe.photo_type)
         |> Plug.Conn.send_resp(200, recipe.photo)
-    end
-  end
-
-  defp require_user(conn, _) do
-    case get_session(conn, :user_id) do
-      nil -> conn
-      |> put_flash(:error, gettext("User required!"))
-      |> halt()
-      id -> conn
-      |> assign(:current_user, Num.Accounts.get_user!(id))
     end
   end
 
