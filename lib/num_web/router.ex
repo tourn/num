@@ -33,6 +33,8 @@ defmodule NumWeb.Router do
     get "/random", RecipeController, :random
     post "/recipes/:id/cook", RecipeController, :cook
     post "/recipes/:id/skip", RecipeController, :skip
+    get "/recipes/:id/thumb", RecipeController, :thumb
+    get "/recipes/:id/photo", RecipeController, :photo
     resources "/recipes", RecipeController
   end
 

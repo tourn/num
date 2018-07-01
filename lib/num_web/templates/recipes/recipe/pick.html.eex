@@ -8,5 +8,5 @@
 <span><%= button gettext("Something else"), to: recipes_recipe_path(@conn, :skip, @recipe), class: "btn btn-default" %></span>
 
 <%= if @recipe.photo != nil do %>
-<img src="<%= encode_photo(@recipe)%>"/>
+<div class="recipe-header-photo" style="background-image: url('<%= recipes_recipe_path(@conn, :photo, @recipe.id)%>')"></div>
 <% end %>

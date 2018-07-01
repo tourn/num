@@ -3,6 +3,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th></th>
       <th><%= gettext "Title" %></th>
       <th><%= gettext "last cooked" %></th>
       <th><%= gettext "times cooked" %></th>
@@ -13,6 +14,13 @@
   <tbody>
 <%= for recipe <- @recipes do %>
     <tr>
+      <td>
+        <%= if recipe.has_thumb do  %>
+          <div class="recipe-list-thumb" style="background-image: url('<%= recipes_recipe_path(@conn, :thumb, recipe.id)%>')"/>
+        <% else %>
+          <img class="recipe-list-thumb" src="<%= static_path(@conn, "/images/recipe-book.png")%>"/>
+        <% end %>
+      </td>
       <td><%= recipe.title %></td>
       <td><%= recipe.cooked_at %></td>
       <td><%= recipe.cooked %></td>

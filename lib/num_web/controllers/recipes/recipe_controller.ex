@@ -156,6 +156,32 @@ defmodule NumWeb.Recipes.RecipeController do
     end
   end
 
+  def thumb(conn, %{"id" => recipe_id}) do
+    recipe = Recipes.get_recipe!(recipe_id)
+    cond do
+      recipe.photo_thumb == nil -> conn
+                                   |> put_status(:not_found)
+                                   |> put_view(NumWeb.ErrorView)
+                                   |> render("404.html")
+      true -> conn
+              |> Plug.Conn.put_resp_header("content-type", recipe.photo_type)
+              |> Plug.Conn.send_resp(200, recipe.photo_thumb)
+    end
+  end
+
+  def photo(conn, %{"id" => recipe_id}) do
+    recipe = Recipes.get_recipe!(recipe_id)
+    cond do
+      recipe.photo == nil -> conn
+        |> put_status(:not_found)
+        |> put_view(NumWeb.ErrorView)
+        |> render("404.html")
+      true -> conn
+        |> Plug.Conn.put_resp_header("content-type", recipe.photo_type)
+        |> Plug.Conn.send_resp(200, recipe.photo)
+    end
+  end
+
   defp require_user(conn, _) do
     case get_session(conn, :user_id) do
       nil -> conn

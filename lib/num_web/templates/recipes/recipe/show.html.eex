@@ -1,7 +1,7 @@
 <h2><%= @recipe.title %></h2>
 
 <%= if @recipe.photo != nil do %>
-<div class="recipe-header-photo" style="background-image: url('<%= encode_photo(@recipe)%>')"></div>
+<div class="recipe-header-photo" style="background-image: url('<%= recipes_recipe_path(@conn, :photo, @recipe.id)%>')"></div>
 <% end %>
 
 <%= @recipe.body |> urls_to_anchors() |> markdown() %>

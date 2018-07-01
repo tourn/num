@@ -4,3 +4,10 @@
     background-position: center;
     height: 300px;
 }
+
+.recipe-list-thumb{
+    background-size: cover;
+    background-position: center;
+    height: 64px;
+    width: 64px;
+}
