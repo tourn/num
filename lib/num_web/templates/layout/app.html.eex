@@ -17,6 +17,8 @@
         <nav role="navigation">
           <ul class="nav nav-pills">
             <li><%= link "Home", to: page_path(@conn, :index) %></li>
+            <li><%= link "Rezepte", to: recipes_recipe_path(@conn, :index) %></li>
+            <li><%= link "Vorschlag", to: recipes_recipe_path(@conn, :random) %></li>
             <li><%= link "Login", to: session_path(@conn, :new) %></li>
           </ul>
         </nav>
