@@ -1,5 +1,5 @@
-<h2>New Recipe</h2>
+<h2><%= gettext "New Recipe" %></h2>
 
 <%= render "form.html", Map.put(assigns, :action, recipes_recipe_path(@conn, :create)) %>
 
-<span><%= link "Back", to: recipes_recipe_path(@conn, :index) %></span>
+<span><%= link gettext("Back"), to: recipes_recipe_path(@conn, :index), class: "btn btn-default" %></span>
