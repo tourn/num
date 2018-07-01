@@ -14,7 +14,7 @@ defmodule NumWeb.Recipes.RecipeController do
 
   def new(conn, _params) do
     changeset = Recipes.change_recipe(%Recipe{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, recipe: nil)
   end
 
   defp transform_photo_param(%{"photo" => photo} = rest) do
