@@ -1,1 +1,6 @@
 /* This file is for your main application css. */
+.recipe-header-photo{
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+}
