@@ -1,7 +1,7 @@
 defmodule Num.Accounts.Credential do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Num.Accounts.{Credential,User}
+  alias Num.Accounts.{User}
 
 
   schema "credentials" do

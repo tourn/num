@@ -96,9 +96,9 @@ defmodule NumWeb.Recipes.RecipeController do
     %{
       value: recipe.id,
       weight: case recipe do
-        %{skipped_at: skipped_at} = rest when skipped_at > skipped_ignore_for -> 0
-        %{cooked_at: nil} = rest -> base_weight
-        %{cooked_at: cooked_at} = rest ->
+        %{skipped_at: skipped_at} when skipped_at > skipped_ignore_for -> 0
+        %{cooked_at: nil} -> base_weight
+        %{cooked_at: cooked_at} ->
           diff_days = diff(utc_now(), cooked_at, :second)
           |> Kernel./(day)
           |> Kernel.trunc
@@ -109,7 +109,7 @@ defmodule NumWeb.Recipes.RecipeController do
   end
 
   def random(conn, _params) do
-    recipe = Recipes.list_recipes_with_events(conn.assigns.current_user.id)
+    Recipes.list_recipes_with_events(conn.assigns.current_user.id)
     |> Enum.map(&recipe_weight/1)
     |> Enum.filter(& &1.weight > 0)
     |> IO.inspect(label: "weighted recipes")
