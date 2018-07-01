@@ -17,14 +17,6 @@ defmodule NumWeb.Recipes.RecipeController do
     render(conn, "new.html", changeset: changeset)
   end
 
-#  defp transform_params(%{"photo" => photo} = params) do
-#    data = File.read()
-#  end
-#
-#  defp transform_params(recipe_params) do
-#    recipe_params
-#  end
-
 
   def create(conn, %{"recipe" => recipe_params}) do
     IO.inspect recipe_params
@@ -77,9 +69,45 @@ defmodule NumWeb.Recipes.RecipeController do
     |> redirect(to: recipes_recipe_path(conn, :index))
   end
 
+
+  def recipe_weight(recipe) do
+    import NaiveDateTime
+    hours = 60 * 60
+    day = hours * 24
+    four_hours_ago = utc_now() |> add(-4 * hours, :second)
+    base_weight = 10
+    %{
+      value: recipe.id,
+      weight: case recipe do
+        %{skipped_at: skipped_at} = rest when skipped_at > four_hours_ago -> 0
+        %{skipped_at: nil} = rest -> base_weight
+        %{cooked_at: cooked_at} = rest ->
+          diff_days = diff(utc_now(), cooked_at, :second)
+          |> Kernel./(day)
+          |> Float.round
+          Enum.max([0, base_weight - diff_days])
+        _ -> base_weight
+        end
+    }
+  end
+
   def random(conn, _params) do
-    recipes = Recipes.list_recipes()
-    recipe = Enum.random(recipes)
+    recipe = Recipes.list_recipes_with_events(conn.assigns.current_user.id)
+    |> Enum.map(&recipe_weight/1)
+    |> Enum.filter(& &1.weight > 0)
+    |> IO.inspect(label: "weighted recipes")
+    |> WeightedRandom.complex()
+    |> render_random(conn)
+  end
+
+  defp render_random(nil, conn) do
+    conn
+    |> put_flash(:info, "Mir sind die Ideen ausgegangen...")
+    |> redirect(to: recipes_recipe_path(conn, :index))
+  end
+
+  defp render_random(recipe_id, conn) do
+    recipe =  Recipes.get_recipe!(recipe_id)
     last_cooked = Recipes.last_cooked(recipe.id, conn.assigns.current_user.id)
     render(conn, "pick.html", recipe: recipe, last_cooked: last_cooked)
   end
