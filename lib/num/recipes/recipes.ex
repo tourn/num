@@ -120,9 +120,10 @@ defmodule Num.Recipes do
 
   def list_recipes_with_events(user_id) do
     stats_query = """
-    select id, title, cooked_at, skipped_at, coalesce(cooked, 0) cooked, coalesce(skipped, 0) skipped, photo_thumb is not null as has_thumb from recipes
+    select id, title, cooked_at, skipped_at, coalesce(cooked, 0) cooked, coalesce(skipped, 0) skipped, photo_thumb is not null as has_thumb, saved_count is not null as saved from recipes
     left join (select recipe_id, count(*) cooked,  max(inserted_at) cooked_at  from recipe_event where event = 'cook' and user_id=#{user_id} group by recipe_id) c  on recipes.id = c.recipe_id
     left join (select recipe_id, count(*) skipped, max(inserted_at) skipped_at from recipe_event where event = 'skip' and user_id=#{user_id} group by recipe_id) s  on recipes.id = s.recipe_id
+    left join (select recipe_id, count(*) saved_count from recipe_event where event = 'save' and user_id=#{user_id} group by recipe_id) sv  on recipes.id = sv.recipe_id
     """
 
     types = %{
@@ -132,7 +133,8 @@ defmodule Num.Recipes do
       skipped_at: :naive_datetime,
       cooked: :integer,
       skipped: :integer,
-      has_thumb: :boolean
+      has_thumb: :boolean,
+      saved: :boolean,
     }
 
     {:ok, result} = Ecto.Adapters.SQL.query(Repo, stats_query)
@@ -219,6 +221,12 @@ defmodule Num.Recipes do
   """
   def delete_recipe_event(%RecipeEvent{} = recipe_event) do
     Repo.delete(recipe_event)
+  end
+
+  def delete_recipe_event(user_id, recipe_id, event_type) do
+    from(e in RecipeEvent,
+      where: e.user_id == ^user_id and e.recipe_id == ^recipe_id and e.event == ^event_type)
+      |> Repo.delete_all
   end
 
   @doc """

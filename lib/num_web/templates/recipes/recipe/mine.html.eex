@@ -1,0 +1,4 @@
+<h2><%= gettext "My Recipes" %></h2>
+
+<%= render "list.html", Map.put(assigns, :recipes, @recipes) %>
+

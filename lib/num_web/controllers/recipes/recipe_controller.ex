@@ -5,9 +5,14 @@ defmodule NumWeb.Recipes.RecipeController do
   alias Num.Recipes.Recipe
 
   def index(conn, _params) do
-    #recipes = Recipes.list_recipes()
     recipes = Recipes.list_recipes_with_events(conn.assigns.current_user.id)
     render(conn, "index.html", recipes: recipes)
+  end
+
+  def mine(conn, _params) do
+    recipes = Recipes.list_recipes_with_events(conn.assigns.current_user.id)
+    |> Enum.filter(& &1.saved == true)
+    render(conn, "mine.html", recipes: recipes)
   end
 
   def new(conn, _params) do
@@ -94,6 +99,7 @@ defmodule NumWeb.Recipes.RecipeController do
     %{
       value: recipe.id,
       weight: case recipe do
+        %{saved: false} -> 0
         %{skipped_at: skipped_at} when skipped_at > skipped_ignore_for -> 0
         %{cooked_at: nil} -> base_weight
         %{cooked_at: cooked_at} ->
@@ -177,6 +183,33 @@ defmodule NumWeb.Recipes.RecipeController do
       true -> conn
         |> Plug.Conn.put_resp_header("content-type", recipe.photo_type)
         |> Plug.Conn.send_resp(200, recipe.photo)
+    end
+  end
+
+   def save_recipe(conn, %{"id" => recipe_id}) do
+      recipe = Recipes.get_recipe!(recipe_id)
+      case Recipes.create_recipe_event(%{
+        "recipe" => recipe,
+        "user" => conn.assigns.current_user,
+        "event" => "save"
+      }) do
+        {:ok, _} ->
+          conn
+          |> put_flash(:info, gettext("Recipe saved"))
+          |> redirect(to: recipes_recipe_path(conn, :index)<>"#r#{recipe_id}")
+      end
+   end
+
+  def forget_recipe(conn, %{"id" => recipe_id}) do
+    case Recipes.delete_recipe_event(conn.assigns.current_user.id, recipe_id, "save") do
+      {n, _} when n > 0->
+        conn
+        |> put_flash(:info, gettext("Recipe removed"))
+        |> redirect(to: recipes_recipe_path(conn, :index)<>"#r#{recipe_id}")
+      _ ->
+        conn
+        |> put_flash(:error, gettext("Could not remove recipe"))
+        |> redirect(to: recipes_recipe_path(conn, :index)<>"#r#{recipe_id}")
     end
   end
 

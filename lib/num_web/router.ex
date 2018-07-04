@@ -30,9 +30,15 @@ defmodule NumWeb.Router do
   scope "/recipes", NumWeb.Recipes, as: :recipes do
     pipe_through [:browser, :authenticate_user]
 
+    get "/mine", RecipeController, :mine
     get "/random", RecipeController, :random
+
+    put "/recipes/:id/bookmark", RecipeController, :save_recipe
+    delete "/recipes/:id/bookmark", RecipeController, :forget_recipe
+
     post "/recipes/:id/cook", RecipeController, :cook
     post "/recipes/:id/skip", RecipeController, :skip
+
     get "/recipes/:id/thumb", RecipeController, :thumb
     get "/recipes/:id/photo", RecipeController, :photo
     resources "/recipes", RecipeController

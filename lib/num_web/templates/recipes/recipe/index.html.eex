@@ -1,39 +1,5 @@
 <h2><%= gettext "All Recipes" %></h2>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th></th>
-      <th><%= gettext "Title" %></th>
-      <th><%= gettext "last cooked" %></th>
-      <th><%= gettext "times cooked" %></th>
-      <th><%= gettext "times skipped" %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for recipe <- @recipes do %>
-    <tr>
-      <td>
-        <%= if recipe.has_thumb do  %>
-          <div class="recipe-list-thumb" style="background-image: url('<%= recipes_recipe_path(@conn, :thumb, recipe.id)%>')"/>
-        <% else %>
-          <img class="recipe-list-thumb" src="<%= static_path(@conn, "/images/recipe-book.png")%>"/>
-        <% end %>
-      </td>
-      <td><%= recipe.title %></td>
-      <td><%= recipe.cooked_at %></td>
-      <td><%= recipe.cooked %></td>
-      <td><%= recipe.skipped %></td>
-
-      <td class="text-right">
-        <span><%= link gettext("Show"), to: recipes_recipe_path(@conn, :show, recipe.id), class: "btn btn-default btn-xs" %></span>
-        <span><%= link gettext("Edit"), to: recipes_recipe_path(@conn, :edit, recipe.id), class: "btn btn-default btn-xs" %></span>
-        <span><%= link gettext("Delete"), to: recipes_recipe_path(@conn, :delete, recipe.id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+<%= render "list.html", Map.put(assigns, :recipes, @recipes) %>
 
 <span><%= link gettext("New Recipe"), to: recipes_recipe_path(@conn, :new), class: "btn btn-primary" %></span>

@@ -17,7 +17,8 @@
         <nav role="navigation">
           <ul class="nav nav-pills">
             <li><%= link gettext("Home"), to: page_path(@conn, :index) %></li>
-            <li><%= link gettext("Recipes"), to: recipes_recipe_path(@conn, :index) %></li>
+            <li><%= link gettext("All Recipes"), to: recipes_recipe_path(@conn, :index) %></li>
+            <li><%= link gettext("My Recipes"), to: recipes_recipe_path(@conn, :mine) %></li>
             <li><%= link gettext("Recommendation"), to: recipes_recipe_path(@conn, :random) %></li>
             <li><%= link gettext("Login"), to: session_path(@conn, :new) %></li>
           </ul>

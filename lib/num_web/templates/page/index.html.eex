@@ -10,6 +10,7 @@
     <ul>
       <li><%= link gettext("New"), to: recipes_recipe_path(@conn, :new) %></li>
       <li><%= link gettext("List"), to: recipes_recipe_path(@conn, :index) %></li>
+      <li><%= link gettext("Saved"), to: recipes_recipe_path(@conn, :mine) %></li>
       <li><%= link gettext("Pick a random one"), to: recipes_recipe_path(@conn, :random) %></li>
     </ul>
   </div>
