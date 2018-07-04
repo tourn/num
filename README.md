@@ -1,5 +1,11 @@
 # Num
 
+Num a recipe collection that gives you recipe suggestions based on what you recently picked (or rather, did not pick). There are some [Ideas](https://github.com/tourn/num/wiki/Healthy-varied-diet) around about trying to make sure the user eats a healthy variety of nutrients during the week.
+
+It is intended to be run on dokku and probably runs on heroku as well.
+
+---
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
