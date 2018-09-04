@@ -1,10 +1,13 @@
 <h2><%= @recipe.title %></h2>
 
 <%= if @recipe.photo != nil do %>
+<a href="<%= recipes_recipe_path(@conn, :photo, @recipe.id)%>">
 <div class="recipe-header-photo" style="background-image: url('<%= recipes_recipe_path(@conn, :photo, @recipe.id)%>')"></div>
+</a>
 <% end %>
 
 <%= @recipe.body |> urls_to_anchors() |> markdown() %>
 
 <span><%= link gettext("Edit"), to: recipes_recipe_path(@conn, :edit, @recipe), class: "btn btn-default" %></span>
 <span><%= link gettext("Back"), to: recipes_recipe_path(@conn, :index), class: "btn btn-default" %></span>
+<span><%= link gettext("Delete"), to: recipes_recipe_path(@conn, :delete, @recipe.id), method: :delete, data: [confirm: gettext "Are you sure?"], class: "btn btn-danger" %></span>

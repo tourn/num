@@ -74,20 +74,14 @@ msgid "All Recipes"
 msgstr "Alle Rezepte"
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:39
+#: lib/num_web/templates/recipes/recipe/show.html.eex:13
 msgid "Delete"
 msgstr "Löschen"
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:38
-#: lib/num_web/templates/recipes/recipe/show.html.eex:9
+#: lib/num_web/templates/recipes/recipe/show.html.eex:11
 msgid "Edit"
 msgstr "Bearbeiten"
-
-#, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:37
-msgid "Show"
-msgstr "Anzeigen"
 
 #, elixir-format
 #: lib/num_web/templates/recipes/recipe/list.html.eex:5
@@ -103,11 +97,6 @@ msgstr "Zuletzt gekocht"
 #: lib/num_web/templates/recipes/recipe/list.html.eex:7
 msgid "times cooked"
 msgstr "# gekocht"
-
-#, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:8
-msgid "times skipped"
-msgstr "# ausgelassen"
 
 #, elixir-format
 #: lib/num_web/templates/recipes/recipe/index.html.eex:5
@@ -143,7 +132,7 @@ msgstr "Etwas anderes"
 #, elixir-format
 #: lib/num_web/templates/recipes/recipe/edit.html.eex:5
 #: lib/num_web/templates/recipes/recipe/new.html.eex:5
-#: lib/num_web/templates/recipes/recipe/show.html.eex:10
+#: lib/num_web/templates/recipes/recipe/show.html.eex:12
 msgid "Back"
 msgstr "Zurück"
 
@@ -203,7 +192,7 @@ msgid "Could not remove recipe"
 msgstr "Rezept konnte nicht entfernt werden"
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:33
+#: lib/num_web/templates/recipes/recipe/list.html.eex:37
 msgid "Forget"
 msgstr "Vergessen"
 
@@ -224,7 +213,7 @@ msgid "Recipe saved"
 msgstr "Rezept gespeichert"
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:35
+#: lib/num_web/templates/recipes/recipe/list.html.eex:39
 msgid "Save"
 msgstr "Speichern"
 
@@ -234,6 +223,16 @@ msgid "Saved"
 msgstr "Gespeichert"
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:15
+#: lib/num_web/templates/recipes/recipe/list.html.eex:14
 msgid "Search"
 msgstr "Suchen"
+
+#, elixir-format
+#: lib/num_web/templates/recipes/recipe/show.html.eex:13
+msgid "Are you sure?"
+msgstr "Bist Du sicher?"
+
+#, elixir-format
+#: lib/num_web/views/recipes/recipe_view.ex:33
+msgid "Never"
+msgstr "Nie"

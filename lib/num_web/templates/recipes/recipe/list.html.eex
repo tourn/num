@@ -5,7 +5,6 @@
       <th><%= gettext "Title" %></th>
       <th><%= gettext "last cooked" %></th>
       <th><%= gettext "times cooked" %></th>
-      <th><%= gettext "times skipped" %></th>
       <th></th>
     </tr>
   </thead>
@@ -17,26 +16,28 @@
 <%= for recipe <- @recipes do %>
     <tr id="r<%= recipe.id %>">
       <td>
+        <a href="<%=recipes_recipe_path(@conn, :show, recipe.id)%>">
         <%= if recipe.has_thumb do  %>
-          <div class="recipe-list-thumb" style="background-image: url('<%= recipes_recipe_path(@conn, :thumb, recipe.id)%>')"/>
+          <div class="recipe-list-thumb" style="background-image: url('<%= recipes_recipe_path(@conn, :thumb, recipe.id)%>')"></div>
         <% else %>
           <img class="recipe-list-thumb" src="<%= static_path(@conn, "/images/recipe-book.png")%>"/>
         <% end %>
+        </a>
       </td>
-      <td><%= recipe.title %></td>
-      <td><%= recipe.cooked_at %></td>
+      <td>
+        <a href="<%=recipes_recipe_path(@conn, :show, recipe.id)%>">
+          <%= recipe.title %>
+        </a>
+      </td>
+      <td><%= format_date(recipe.cooked_at) %></td>
       <td><%= recipe.cooked %></td>
-      <td><%= recipe.skipped %></td>
 
       <td class="text-right">
         <%= if recipe.saved do %>
             <span><%= button gettext("Forget"), to: recipes_recipe_path(@conn, :forget_recipe, recipe.id), method: "delete", class: "btn btn-primary btn-xs" %></span>
         <% else %>
-            <span><%= button gettext("Save"), to: recipes_recipe_path(@conn, :save_recipe, recipe.id), method: "put", class: "btn btn-primary btn-xs" %></span>
+            <span><%= button gettext("Save"), to: recipes_recipe_path(@conn, :save_recipe, recipe.id), method: "put", class: "btn btn-default btn-xs" %></span>
         <% end %>
-        <span><%= link gettext("Show"), to: recipes_recipe_path(@conn, :show, recipe.id), class: "btn btn-default btn-xs" %></span>
-        <span><%= link gettext("Edit"), to: recipes_recipe_path(@conn, :edit, recipe.id), class: "btn btn-default btn-xs" %></span>
-        <span><%= link gettext("Delete"), to: recipes_recipe_path(@conn, :delete, recipe.id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
       </td>
     </tr>
 <% end %>

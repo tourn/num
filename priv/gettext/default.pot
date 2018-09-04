@@ -73,19 +73,13 @@ msgid "All Recipes"
 msgstr ""
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:39
+#: lib/num_web/templates/recipes/recipe/show.html.eex:13
 msgid "Delete"
 msgstr ""
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:38
-#: lib/num_web/templates/recipes/recipe/show.html.eex:9
+#: lib/num_web/templates/recipes/recipe/show.html.eex:11
 msgid "Edit"
-msgstr ""
-
-#, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:37
-msgid "Show"
 msgstr ""
 
 #, elixir-format
@@ -101,11 +95,6 @@ msgstr ""
 #, elixir-format
 #: lib/num_web/templates/recipes/recipe/list.html.eex:7
 msgid "times cooked"
-msgstr ""
-
-#, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:8
-msgid "times skipped"
 msgstr ""
 
 #, elixir-format
@@ -142,7 +131,7 @@ msgstr ""
 #, elixir-format
 #: lib/num_web/templates/recipes/recipe/edit.html.eex:5
 #: lib/num_web/templates/recipes/recipe/new.html.eex:5
-#: lib/num_web/templates/recipes/recipe/show.html.eex:10
+#: lib/num_web/templates/recipes/recipe/show.html.eex:12
 msgid "Back"
 msgstr ""
 
@@ -202,7 +191,7 @@ msgid "Could not remove recipe"
 msgstr ""
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:33
+#: lib/num_web/templates/recipes/recipe/list.html.eex:37
 msgid "Forget"
 msgstr ""
 
@@ -223,7 +212,7 @@ msgid "Recipe saved"
 msgstr ""
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:35
+#: lib/num_web/templates/recipes/recipe/list.html.eex:39
 msgid "Save"
 msgstr ""
 
@@ -233,6 +222,16 @@ msgid "Saved"
 msgstr ""
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:15
+#: lib/num_web/templates/recipes/recipe/list.html.eex:14
 msgid "Search"
+msgstr ""
+
+#, elixir-format
+#: lib/num_web/templates/recipes/recipe/show.html.eex:13
+msgid "Are you sure?"
+msgstr ""
+
+#, elixir-format
+#: lib/num_web/views/recipes/recipe_view.ex:33
+msgid "Never"
 msgstr ""

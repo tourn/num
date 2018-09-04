@@ -43,7 +43,8 @@ defmodule Num.Mixfile do
       {:cowboy, "~> 1.0"},
       {:earmark, "~> 1.2.4"},
       {:weighted_random, "~> 0.1.0"},
-      {:mogrify, "~> 0.6.1"}
+      {:mogrify, "~> 0.6.1"},
+      {:timex, "~> 3.1"}
     ]
   end
 

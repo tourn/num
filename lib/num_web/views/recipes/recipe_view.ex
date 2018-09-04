@@ -1,5 +1,6 @@
 defmodule NumWeb.Recipes.RecipeView do
   use NumWeb, :view
+  use Timex
 
   def encode_thumb(recipe) do
     encoded = Base.encode64(recipe.photo_thumb)
@@ -26,5 +27,15 @@ defmodule NumWeb.Recipes.RecipeView do
   def urls_to_anchors(body) do
     regex = ~r<(https?|ftp)://[^\s/$.?#].[^\s]*>i
     Regex.replace(regex, body, ~s(<a href="\\0">\\0</a>))
+  end
+
+  def format_date(nil) do
+    gettext "Never"
+  end
+
+  def format_date(date) do
+    date
+#    |> Timex.to_datetime()
+    |> Timex.format!("{D}.{M}.{YYYY}")
   end
 end
