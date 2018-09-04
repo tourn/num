@@ -4,8 +4,14 @@ defmodule NumWeb.Recipes.RecipeController do
   alias Num.Recipes
   alias Num.Recipes.Recipe
 
-  def index(conn, _params) do
+  def index(conn, params) do
+
+    defaults = %{"q" => ""}
+    %{"q" => title_filter} = Map.merge(defaults, params)
+
     recipes = Recipes.list_recipes_with_events(conn.assigns.current_user.id)
+    |> Enum.filter(& String.downcase(&1.title) =~ String.downcase(title_filter))
+
     render(conn, "index.html", recipes: recipes)
   end
 

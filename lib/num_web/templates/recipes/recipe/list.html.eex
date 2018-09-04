@@ -10,6 +10,10 @@
     </tr>
   </thead>
   <tbody>
+  <%= form_for @conn, recipes_recipe_path(@conn, :index), [method: :get], fn f -> %>
+    <%= text_input f, :q %>
+    <%= submit gettext "Search" %>
+  <% end %>
 <%= for recipe <- @recipes do %>
     <tr id="r<%= recipe.id %>">
       <td>

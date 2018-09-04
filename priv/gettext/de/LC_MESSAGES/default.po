@@ -74,18 +74,18 @@ msgid "All Recipes"
 msgstr "Alle Rezepte"
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:35
+#: lib/num_web/templates/recipes/recipe/list.html.eex:39
 msgid "Delete"
 msgstr "Löschen"
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:34
+#: lib/num_web/templates/recipes/recipe/list.html.eex:38
 #: lib/num_web/templates/recipes/recipe/show.html.eex:9
 msgid "Edit"
 msgstr "Bearbeiten"
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:33
+#: lib/num_web/templates/recipes/recipe/list.html.eex:37
 msgid "Show"
 msgstr "Anzeigen"
 
@@ -116,7 +116,7 @@ msgid "New Recipe"
 msgstr "Neues Rezept"
 
 #, elixir-format
-#: lib/num_web/controllers/recipes/recipe_controller.ex:126
+#: lib/num_web/controllers/recipes/recipe_controller.ex:132
 msgid "I've run out of ideas..."
 msgstr "Mir sind die Ideen ausgegangen..."
 
@@ -178,53 +178,53 @@ msgid "Submit"
 msgstr "Speichern"
 
 #, elixir-format
-#: lib/num_web/controllers/recipes/recipe_controller.ex:145
+#: lib/num_web/controllers/recipes/recipe_controller.ex:151
 msgid "Looks tasty. Enjoy!"
 msgstr "En Guete!"
 
 #, elixir-format
-#: lib/num_web/controllers/recipes/recipe_controller.ex:52
+#: lib/num_web/controllers/recipes/recipe_controller.ex:58
 msgid "Recipe created successfully."
 msgstr "Rezept erfolgreich erstellt."
 
 #, elixir-format
-#: lib/num_web/controllers/recipes/recipe_controller.ex:88
+#: lib/num_web/controllers/recipes/recipe_controller.ex:94
 msgid "Recipe deleted successfully."
 msgstr "Rezept erfolgreich gelöscht."
 
 #, elixir-format
-#: lib/num_web/controllers/recipes/recipe_controller.ex:76
+#: lib/num_web/controllers/recipes/recipe_controller.ex:82
 msgid "Recipe updated successfully."
 msgstr "Rezept erfolgreich bearbeitet."
 
 #, elixir-format
-#: lib/num_web/controllers/recipes/recipe_controller.ex:212
+#: lib/num_web/controllers/recipes/recipe_controller.ex:217
 msgid "Could not remove recipe"
 msgstr "Rezept konnte nicht entfernt werden"
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:29
+#: lib/num_web/templates/recipes/recipe/list.html.eex:33
 msgid "Forget"
 msgstr "Vergessen"
 
-#, elixir-format, fuzzy
+#, elixir-format
 #: lib/num_web/templates/layout/app.html.eex:21
 #: lib/num_web/templates/recipes/recipe/mine.html.eex:1
 msgid "My Recipes"
 msgstr "Meine Rezepte"
 
-#, elixir-format, fuzzy
-#: lib/num_web/controllers/recipes/recipe_controller.ex:208
+#, elixir-format
+#: lib/num_web/controllers/recipes/recipe_controller.ex:213
 msgid "Recipe removed"
 msgstr "Rezept entfernt"
 
-#, elixir-format, fuzzy
-#: lib/num_web/controllers/recipes/recipe_controller.ex:198
+#, elixir-format
+#: lib/num_web/controllers/recipes/recipe_controller.ex:204
 msgid "Recipe saved"
 msgstr "Rezept gespeichert"
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:31
+#: lib/num_web/templates/recipes/recipe/list.html.eex:35
 msgid "Save"
 msgstr "Speichern"
 
@@ -232,3 +232,8 @@ msgstr "Speichern"
 #: lib/num_web/templates/page/index.html.eex:13
 msgid "Saved"
 msgstr "Gespeichert"
+
+#, elixir-format
+#: lib/num_web/templates/recipes/recipe/list.html.eex:15
+msgid "Search"
+msgstr "Suchen"

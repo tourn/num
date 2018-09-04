@@ -124,6 +124,7 @@ defmodule Num.Recipes do
     left join (select recipe_id, count(*) cooked,  max(inserted_at) cooked_at  from recipe_event where event = 'cook' and user_id=#{user_id} group by recipe_id) c  on recipes.id = c.recipe_id
     left join (select recipe_id, count(*) skipped, max(inserted_at) skipped_at from recipe_event where event = 'skip' and user_id=#{user_id} group by recipe_id) s  on recipes.id = s.recipe_id
     left join (select recipe_id, count(*) saved_count from recipe_event where event = 'save' and user_id=#{user_id} group by recipe_id) sv  on recipes.id = sv.recipe_id
+    order by title asc
     """
 
     types = %{

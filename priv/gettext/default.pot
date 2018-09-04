@@ -73,18 +73,18 @@ msgid "All Recipes"
 msgstr ""
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:35
+#: lib/num_web/templates/recipes/recipe/list.html.eex:39
 msgid "Delete"
 msgstr ""
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:34
+#: lib/num_web/templates/recipes/recipe/list.html.eex:38
 #: lib/num_web/templates/recipes/recipe/show.html.eex:9
 msgid "Edit"
 msgstr ""
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:33
+#: lib/num_web/templates/recipes/recipe/list.html.eex:37
 msgid "Show"
 msgstr ""
 
@@ -115,7 +115,7 @@ msgid "New Recipe"
 msgstr ""
 
 #, elixir-format
-#: lib/num_web/controllers/recipes/recipe_controller.ex:126
+#: lib/num_web/controllers/recipes/recipe_controller.ex:132
 msgid "I've run out of ideas..."
 msgstr ""
 
@@ -177,32 +177,32 @@ msgid "Submit"
 msgstr ""
 
 #, elixir-format
-#: lib/num_web/controllers/recipes/recipe_controller.ex:145
+#: lib/num_web/controllers/recipes/recipe_controller.ex:151
 msgid "Looks tasty. Enjoy!"
 msgstr ""
 
 #, elixir-format
-#: lib/num_web/controllers/recipes/recipe_controller.ex:52
+#: lib/num_web/controllers/recipes/recipe_controller.ex:58
 msgid "Recipe created successfully."
 msgstr ""
 
 #, elixir-format
-#: lib/num_web/controllers/recipes/recipe_controller.ex:88
+#: lib/num_web/controllers/recipes/recipe_controller.ex:94
 msgid "Recipe deleted successfully."
 msgstr ""
 
 #, elixir-format
-#: lib/num_web/controllers/recipes/recipe_controller.ex:76
+#: lib/num_web/controllers/recipes/recipe_controller.ex:82
 msgid "Recipe updated successfully."
 msgstr ""
 
 #, elixir-format
-#: lib/num_web/controllers/recipes/recipe_controller.ex:212
+#: lib/num_web/controllers/recipes/recipe_controller.ex:217
 msgid "Could not remove recipe"
 msgstr ""
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:29
+#: lib/num_web/templates/recipes/recipe/list.html.eex:33
 msgid "Forget"
 msgstr ""
 
@@ -213,21 +213,26 @@ msgid "My Recipes"
 msgstr ""
 
 #, elixir-format
-#: lib/num_web/controllers/recipes/recipe_controller.ex:208
+#: lib/num_web/controllers/recipes/recipe_controller.ex:213
 msgid "Recipe removed"
 msgstr ""
 
 #, elixir-format
-#: lib/num_web/controllers/recipes/recipe_controller.ex:198
+#: lib/num_web/controllers/recipes/recipe_controller.ex:204
 msgid "Recipe saved"
 msgstr ""
 
 #, elixir-format
-#: lib/num_web/templates/recipes/recipe/list.html.eex:31
+#: lib/num_web/templates/recipes/recipe/list.html.eex:35
 msgid "Save"
 msgstr ""
 
 #, elixir-format
 #: lib/num_web/templates/page/index.html.eex:13
 msgid "Saved"
+msgstr ""
+
+#, elixir-format
+#: lib/num_web/templates/recipes/recipe/list.html.eex:15
+msgid "Search"
 msgstr ""
