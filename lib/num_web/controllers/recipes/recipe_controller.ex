@@ -54,9 +54,12 @@ defmodule NumWeb.Recipes.RecipeController do
   def create(conn, %{"recipe" => recipe_params}) do
     case Recipes.create_recipe(transform_photo_param(recipe_params)) do
       {:ok, recipe} ->
-        conn
-        |> put_flash(:info, gettext "Recipe created successfully.")
-        |> redirect(to: recipes_recipe_path(conn, :show, recipe))
+        case do_save_recipe(recipe, conn.assigns.current_user) do
+          {:ok, _} ->
+            conn
+            |> put_flash(:info, gettext "Recipe created successfully.")
+            |> redirect(to: recipes_recipe_path(conn, :show, recipe))
+        end
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -192,18 +195,22 @@ defmodule NumWeb.Recipes.RecipeController do
     end
   end
 
+  defp do_save_recipe(recipe, user) do
+    Recipes.create_recipe_event(%{
+      "recipe" => recipe,
+      "user" => user,
+      "event" => "save"
+    })
+  end
+
    def save_recipe(conn, %{"id" => recipe_id}) do
-      recipe = Recipes.get_recipe!(recipe_id)
-      case Recipes.create_recipe_event(%{
-        "recipe" => recipe,
-        "user" => conn.assigns.current_user,
-        "event" => "save"
-      }) do
-        {:ok, _} ->
-          conn
-          |> put_flash(:info, gettext("Recipe saved"))
-          |> redirect(to: recipes_recipe_path(conn, :index)<>"#r#{recipe_id}")
-      end
+    recipe = Recipes.get_recipe!(recipe_id)
+    case do_save_recipe(recipe, conn.assigns.current_user) do
+      {:ok, _} ->
+        conn
+        |> put_flash(:info, gettext("Recipe saved"))
+        |> redirect(to: recipes_recipe_path(conn, :index)<>"#r#{recipe_id}")
+    end
    end
 
   def forget_recipe(conn, %{"id" => recipe_id}) do
