@@ -2,7 +2,7 @@
 <p><%= gettext "How about..." %></p>
 <h2><%= @recipe.title %></h2>
 
-<p><%= gettext "Last cooked: %{at}", at: @last_cooked %></p>
+<p><%= gettext "Last cooked: %{at}", at: format_date(@last_cooked) %></p>
 
 <span><%= button gettext("Cook!"), to: recipes_recipe_path(@conn, :cook, @recipe), class: "btn btn-primary" %></span>
 <span><%= button gettext("Something else"), to: recipes_recipe_path(@conn, :skip, @recipe), class: "btn btn-default" %></span>
