@@ -9,6 +9,17 @@
 
     <title>Num</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link href="<%= static_path(@conn, "/images/apple-touch-icon.png") %>" rel="apple-touch-icon-precomposed" />
+    <link href="<%= static_path(@conn, "/images/apple-touch-icon.png") %>" rel="apple-touch-icon" />
+    <link href="<%= static_path(@conn, "/images/apple-touch-icon-180x180.png") %>" rel="apple-touch-icon" sizes="180x180" />
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <link href="<%= static_path(@conn, "/images/icon-hires.png") %>" rel="icon" sizes="192x192" />
+    <link href="<%= static_path(@conn, "/images/icon-normal.png") %>" rel="icon" sizes="128x128" />
+    <link href="<%= static_path(@conn, "/images/icon-hires.png") %>" rel="shortcut icon" sizes="192x192" />
+    <link href="<%= static_path(@conn, "/images/icon-normal.png") %>" rel="shortcut icon" sizes="128x128" />
   </head>
 
   <body>
