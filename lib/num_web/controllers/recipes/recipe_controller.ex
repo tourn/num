@@ -178,6 +178,7 @@ defmodule NumWeb.Recipes.RecipeController do
                                    |> render("404.html")
       true -> conn
               |> Plug.Conn.put_resp_header("content-type", recipe.photo_type)
+              |> Plug.Conn.put_resp_header("cache-control", "max-age=604800") # TODO add an ETag
               |> Plug.Conn.send_resp(200, recipe.photo_thumb)
     end
   end
@@ -191,6 +192,7 @@ defmodule NumWeb.Recipes.RecipeController do
         |> render("404.html")
       true -> conn
         |> Plug.Conn.put_resp_header("content-type", recipe.photo_type)
+        |> Plug.Conn.put_resp_header("cache-control", "max-age=604800") # TODO add an ETag
         |> Plug.Conn.send_resp(200, recipe.photo)
     end
   end
